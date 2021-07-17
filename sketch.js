@@ -17,7 +17,7 @@ function preload()
 }
 
 function setup() {
-	createCanvas(1000, 400);
+	createCanvas(1600, 700);
 
 
 	engine = Engine.create();
@@ -26,20 +26,20 @@ function setup() {
 	//Create the Bodies Here
   	ball_options ={
 		isStatic:false,
-		restitution:0,
-		friction:2,
+		restitution:0.3,
+		friction:0,
 		density:1.2
 	}
-	ball=Matter.Bodies.circle(330,150,20,ball_options);
+	ball=Matter.Bodies.circle(260,100,20,ball_options);
     World.add(world,ball);
 
 	 ground_options = {
 		isStatic:true
 	  }
 
-	ground=new Ground(500,390,1000,20,ground_options)
-	leftSide=new Ground(550,350,20,60);
-	rightSide=new Ground(750,350,20,60);
+	ground=new Ground(width/2,670,width,20,ground_options)
+	leftSide=new Ground(1100,600,20,120);
+	rightSide=new Ground(1350,600,20,120);
 
 	Engine.run(engine);
   
@@ -47,10 +47,10 @@ function setup() {
 
 
 function draw() {
-  rectMode(CENTER);
+  ellipseMode(CENTER);
   background(0);
 
-  ellipse(ball.position.x,ball.position.y,37,37);
+  ellipse(ball.position.x,ball.position.y,40,40);
   ground.show();
   leftSide.show();
 rightSide.show();
@@ -61,7 +61,8 @@ rightSide.show();
 
 function keyPressed(){
 	if (keyCode===UP_ARROW){
-		Matter.Body.applyForce(ball,{x:0,y:0},{x:17,y:-40});
+		Matter.Body.applyForce(ball,ball.position,{x:45,y:-65});
+		//Matter.Body.applyForce(ball,{x:0,y:0},{x:17,y:-40});
 
 	}
 }
